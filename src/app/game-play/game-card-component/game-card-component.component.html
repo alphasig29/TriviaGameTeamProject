@@ -1,0 +1,128 @@
+
+
+<div *ngIf="gameOver" class="thePopup">
+  <div class="backdrop" (click)="onClose()">
+    <!-- show the fireworks -->
+    <ng-particles [id]="id" [options]="particlesOptions" [particlesInit]="particlesInit"
+       (particlesLoaded)="particlesLoaded($event)"></ng-particles>
+  </div>
+
+  <div class="alert-box ">
+<div class="row">
+  <h1 class="cong "> Congratulations,  </h1>
+    <div *ngFor="let winner of winners; let i = index">
+    <h1 class="winners">  <span class="and " *ngIf = "i >= 1">  and </span> {{winner.name}} </h1>
+
+  </div>
+  <h1 class="won"> won! </h1>
+  </div>
+    <div class="alert-box-actions">
+      <button class="btn-primary btn" (click)="onClose()">Close</button>
+    </div>
+  </div>
+  </div>
+
+<div class="container-fluid row containcard" >
+
+
+
+  <div class="col-9 cardholder" >
+    <!-- <div class="card tp-box" (click)="onRotateCard()" [@flipState]="flip"> -->
+    <div class="card tp-box" [@flipState]="flip">
+      <div class="card card-back tp-box__side tp-box__back">
+        <!--Card image-->
+        <div class="row col-9">
+          <div class="">
+            <!-- <img class="card-img-top" src="../../shared/images/question.jpg" alt="Card image cap"> -->
+            <img src="../../../assets/trivia-app-answer-boy.jpg" alt="Question Image" width="150" height="135">
+            <a></a>
+          </div>
+          <div class="centerQuestionNum">
+            <h1 *ngIf="currentQuestionIndex >= 0" class="card-title">Question # {{currentQuestionIndex + 1}} of {{questions.length}}</h1>
+            <!-- <h1 class="card-title">Question # {{currentQuestionIndex + 1}}</h1> -->
+            <!-- {{currentQuestionIndex + 1}}  -->
+          </div>
+        </div>
+        <!--/.Card image-->
+
+        <!--Card content-->
+        <div class="" style="margin-left: 1rem; margin-right: 1rem; margin-top: 0px;"> <!--  style="margin-left: 1rem; margin-right: 1rem; margin-top: 0px;"  -->
+          <!--Title-->
+           <h2 *ngIf="currentQuestionIndex >= 0">The Answer: {{questions[currentQuestionIndex].correct_answer}}</h2>
+           <!-- {{questions[currentQuestionIndex].correct_answer}}   -->
+          <hr>
+          <!--Text-->
+          <!-- <p class="card-text">This is the Answer</p> -->
+          <!-- <a class="link-text">
+            <h5 class="waves-light" mdbWavesEffect>Read more</h5>
+          </a> -->
+        </div>
+        <!--/.Card content-->
+        <!-- Card Footer -->
+        <div class="card-row">
+          <div>
+            <a class="link-text btn text-light cardBottomLeft" >
+              <h5 (click)="onRotateCard()">Show Question</h5>
+              <!-- <button class="btn btn-success" type="button" (click)="onRotateCard()" >Show Answer</button> -->
+            </a>
+          </div>
+          <div>
+            <a class="link-text btn text-light cardBottomRight" >
+              <h5 *ngIf="currentQuestionIndex < questions.length - 1" (click)="onNextQuestion()">Next Question</h5>
+              <h5 *ngIf="currentQuestionIndex == questions.length - 1"(click)="onShowWinner()">Show Winner</h5>
+
+
+
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- FRONT OF CARD -->
+
+      <div class="tp-box__side tp-box__front"  >
+        <!--Card image-->
+        <div class="row col-9">
+          <div class="" >
+            <!-- <img class="card-img-top" src="../../shared/images/question.jpg" alt="Card image cap"> -->
+            <img src="../../../assets/trivai-app-question-boy.jpg" alt="Question Image"  width="150" height="135">
+            <a></a>
+          </div>
+          <div class="centerQuestionNum" >
+            <h1 *ngIf="currentQuestionIndex >= 0" class="card-title">Question # {{currentQuestionIndex + 1}} of {{questions.length}}</h1>
+            <!-- <h1 class="card-title">Question # {{currentQuestionIndex + 1}}</h1> -->
+            <!-- {{currentQuestionIndex + 1}}  -->
+          </div>
+        </div>
+        <!--/.Card image-->
+
+        <!--Card content-->
+        <div class="" style="margin-left: 1rem; margin-right: 1rem;">
+          <!--Title-->
+          <!-- <h4 *ngIf="currentQuestionIndex >= 0" class="card-title">Question # {{currentQuestionIndex + 1}}</h4> -->
+          <h2 *ngIf="currentQuestionIndex >= 0" class="card-text">{{questions[currentQuestionIndex].question}}</h2>
+
+          <!-- {{questions[currentQuestionIndex].question}} -->
+          <hr>
+          <!--Text-->
+          <div class="list-group list-group flush" *ngFor="let answer of questions[currentQuestionIndex].incorrect_answers">
+                <p>{{answer}}</p>
+          </div>
+
+        </div>
+        <!--/.Card content-->
+        <div>
+          <a class="link-text btn text-light cardBottomLeft card-row" style="text-align: bottom">
+            <h5 (click)="onRotateCard()">Show Answer</h5>
+            <!-- <button class="btn btn-success" type="button" (click)="onRotateCard()" >Show Answer</button> -->
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
